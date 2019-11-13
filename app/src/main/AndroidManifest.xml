@@ -17,19 +17,23 @@
                 android:name="firebase_analytics_collection_enabled"
                 android:value="false" />
 
-        <activity android:name=".ui.MainActivity">
+        <activity
+                android:name=".ui.MainActivity"
+                android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SettingActivity" />
+        <activity
+                android:name=".ui.SettingActivity"
+                android:theme="@style/AppTheme.ActionBar.Transparent" />
 
         <service
                 android:name=".ReminderMessagingService"
-                android:exported="false"
-                android:enabled="true">
+                android:enabled="true"
+                android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
