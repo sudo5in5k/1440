@@ -39,7 +39,7 @@ internal class NotificationImpl(private val context: Context) : NotificationUsec
         val notification = NotificationCompat.Builder(context, id)
             .setContentText(content)
             .setContentTitle(title)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_access_time_black_24dp)
             .build()
 
         notificationManager.notify(SystemClock.uptimeMillis().toInt(), notification)

@@ -8,12 +8,13 @@ import kotlinx.coroutines.runBlocking
 
 class RemindService : IntentService("") {
     override fun onHandleIntent(intent: Intent?) {
+        val minutes = intent?.getIntExtra("minutes", 0) ?: return
         val notification = NotificationImpl(this)
         runBlocking {
             notification.send(
                 NotificationType.SIMPLE,
-                "Title",
-                "Its me",
+                "1440App",
+                "残り${minutes}分です 生産性高く働きましょう！",
                 "id"
             )
         }

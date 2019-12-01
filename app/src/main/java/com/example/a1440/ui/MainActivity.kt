@@ -82,7 +82,9 @@ class MainActivity : AppCompatActivity() {
             val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, 1440) ?: return
             when (requestCode) {
                 REQUEST_CODE -> {
-                    val intent = Intent(baseContext, RemindService::class.java)
+                    val intent = Intent(baseContext, RemindService::class.java).apply {
+                        putExtra("minutes", minutes)
+                    }
                     val pendingIntent = PendingIntent.getService(
                         baseContext, -1, intent,
                         PendingIntent.FLAG_CANCEL_CURRENT
