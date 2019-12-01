@@ -13,7 +13,7 @@
             android:layout_marginBottom="32dp"
             android:gravity="center"
             android:maxLines="2"
-            android:text="好きな残り時間(分)を\nPUSH通知でお知らせできます"
+            android:text="設定した残り時間(分)になったら\nPUSH通知でお知らせできます"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/notification_timer" />
 

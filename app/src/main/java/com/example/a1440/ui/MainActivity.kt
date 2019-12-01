@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -70,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         set(Calendar.MILLISECOND, 0)
     }
 
+
     /**
      * PUSHにて設定した残り時間を取得
      */
@@ -79,7 +79,8 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, 1440) ?: return
+            val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, DEFAULT_MINUTES) ?: return
+
             when (requestCode) {
                 REQUEST_CODE -> {
                     val intent = Intent(baseContext, RemindService::class.java).apply {
@@ -121,5 +122,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE = 111
+        const val PREFS_NAME = "prefs"
+        const val KEY_MINUTES = "minutes"
+        const val DEFAULT_MINUTES = 1440
     }
 }
