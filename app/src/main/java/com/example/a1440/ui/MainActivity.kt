@@ -2,18 +2,18 @@ package com.example.a1440.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a1440.R
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         sendEventLog()
-        verifyToken()
 
         Observable.interval(1, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
@@ -56,21 +55,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEventLog() {
-        val bundle = Bundle().apply { putString("TEST", "onCreate is called") }
+        val bundle = Bundle().apply { putString("Device_OS", "${Build.VERSION.SDK_INT}") }
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
-    }
-
-    private fun verifyToken() {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(
-            OnCompleteListener {
-                if (!it.isSuccessful) {
-                    Log.d("ushi", "getInstanceId failed: ${it.exception}")
-                    return@OnCompleteListener
-                }
-                val token = it.result?.token ?: return@OnCompleteListener
-                Toast.makeText(this, token, Toast.LENGTH_LONG).show()
-            }
-        )
     }
 
     /**
@@ -84,12 +70,31 @@ class MainActivity : AppCompatActivity() {
         set(Calendar.MILLISECOND, 0)
     }
 
+    /**
+     * PUSHにて設定した残り時間を取得
+     */
+    private fun getNotificationTriggerAtTime(deviceCal: Calendar, minutes: Int) =
+        getTomorrowCal(deviceCal).timeInMillis - TimeUnit.MINUTES.toMillis(minutes.toLong())
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, 0) ?: return
+            val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, 1440) ?: return
             when (requestCode) {
-                REQUEST_CODE -> Log.d("debug", "minutes: $minutes")
+                REQUEST_CODE -> {
+                    val intent = Intent(baseContext, RemindService::class.java)
+                    val pendingIntent = PendingIntent.getService(
+                        baseContext, -1, intent,
+                        PendingIntent.FLAG_CANCEL_CURRENT
+                    )
+                    val alarmManager =
+                        baseContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+                    alarmManager?.setInexactRepeating(
+                        AlarmManager.RTC,
+                        getNotificationTriggerAtTime(Calendar.getInstance(), minutes),
+                        AlarmManager.INTERVAL_DAY, pendingIntent
+                    )
+                }
                 else -> Unit
             }
         }
