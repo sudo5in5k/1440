@@ -1,6 +1,5 @@
 package com.example.a1440.ui
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -10,8 +9,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a1440.R
+import com.example.a1440.service.RemindService
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         set(Calendar.MILLISECOND, 0)
     }
 
-
     /**
      * PUSHにて設定した残り時間を取得
      */
@@ -79,24 +78,24 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            val minutes = data?.getIntExtra(SettingActivity.FROM_INTENT, DEFAULT_MINUTES) ?: return
+            val minutes = data?.getIntExtra(SettingActivity.FROM_SETTING, DEFAULT_MINUTES) ?: return
 
             when (requestCode) {
                 REQUEST_CODE -> {
-                    val intent = Intent(baseContext, RemindService::class.java).apply {
+                    val intent = Intent(applicationContext, RemindService::class.java).apply {
                         putExtra("minutes", minutes)
                     }
                     val pendingIntent = PendingIntent.getService(
-                        baseContext, -1, intent,
+                        applicationContext, -1, intent,
                         PendingIntent.FLAG_CANCEL_CURRENT
                     )
-                    val alarmManager =
-                        baseContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+                    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager?
                     alarmManager?.setInexactRepeating(
                         AlarmManager.RTC,
                         getNotificationTriggerAtTime(Calendar.getInstance(), minutes),
                         AlarmManager.INTERVAL_DAY, pendingIntent
                     )
+                    Toast.makeText(this, "残り${minutes}分で設定しました", Toast.LENGTH_LONG).show()
                 }
                 else -> Unit
             }
@@ -122,8 +121,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE = 111
-        const val PREFS_NAME = "prefs"
-        const val KEY_MINUTES = "minutes"
         const val DEFAULT_MINUTES = 1440
     }
 }

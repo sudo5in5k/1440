@@ -1,9 +1,7 @@
-package com.example.a1440.ui
+package com.example.a1440.service
 
 import android.app.IntentService
 import android.content.Intent
-import com.example.a1440.ui.service.NotificationImpl
-import com.example.a1440.ui.service.NotificationType
 import kotlinx.coroutines.runBlocking
 
 class RemindService : IntentService("") {

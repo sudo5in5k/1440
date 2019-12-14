@@ -26,7 +26,7 @@
                 android:name=".ui.SettingActivity"
                 android:theme="@style/AppTheme.ActionBar.Transparent" />
 
-        <service android:name=".ui.RemindService" />
+        <service android:name="com.example.a1440.service.RemindService" />
     </application>
 
 </manifest>

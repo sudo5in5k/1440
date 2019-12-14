@@ -14,7 +14,7 @@ class SettingActivity : AppCompatActivity() {
 
     private val prefs by lazy {
         getSharedPreferences(
-            MainActivity.PREFS_NAME,
+            PREFS_NAME,
             Context.MODE_PRIVATE
         )
     }
@@ -32,7 +32,7 @@ class SettingActivity : AppCompatActivity() {
                 val minutes =
                     notification_timer.text.toString().toIntOrNull() ?: return@setOnClickListener
                 saveMinutes(minutes)
-                intent.putExtra(FROM_INTENT, minutes)
+                intent.putExtra(FROM_SETTING, minutes)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             } else {
@@ -42,10 +42,10 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun saveMinutes(minutes: Int) =
-        prefs.edit().putInt(MainActivity.KEY_MINUTES, minutes).apply()
+        prefs.edit().putInt(KEY_MINUTES, minutes).apply()
 
     private fun getSavedMinutes() = prefs.getInt(
-        MainActivity.KEY_MINUTES,
+        KEY_MINUTES,
         MainActivity.DEFAULT_MINUTES
     )
 
@@ -55,7 +55,8 @@ class SettingActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val FROM_INTENT = "hoge"
+        const val FROM_SETTING = "from_setting"
+        const val PREFS_NAME = "setting_minutes"
+        const val KEY_MINUTES = "minutes"
     }
-
 }

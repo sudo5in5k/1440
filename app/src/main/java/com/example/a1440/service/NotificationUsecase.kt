@@ -1,4 +1,4 @@
-package com.example.a1440.ui.service
+package com.example.a1440.service
 
 import android.content.Intent
 
