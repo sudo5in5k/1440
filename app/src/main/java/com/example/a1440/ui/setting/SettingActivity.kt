@@ -1,4 +1,4 @@
-package com.example.a1440.ui
+package com.example.a1440.ui.setting
 
 import android.app.Activity
 import android.content.Context
@@ -8,6 +8,7 @@ import android.text.Editable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a1440.R
+import com.example.a1440.ui.top.MainActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
@@ -39,7 +40,26 @@ class SettingActivity : AppCompatActivity() {
                 Toast.makeText(this, "1から1440までの数字を指定してください", Toast.LENGTH_LONG).show()
             }
         }
+
+        toggle.setOnCheckedChangeListener { _, isChecked ->
+            saveToggleState(isChecked)
+            if (isChecked) {
+                save.isEnabled = true
+            } else {
+                save.isEnabled = false
+            }
+        }
+        toggle.isChecked = getSavedToggleState()
     }
+
+    private fun saveToggleState(isChecked: Boolean) {
+        prefs.edit().putBoolean(KEY_TOGGLE, isChecked).apply()
+    }
+
+    private fun getSavedToggleState() = prefs.getBoolean(
+        KEY_TOGGLE,
+        false
+    )
 
     private fun saveMinutes(minutes: Int) =
         prefs.edit().putInt(KEY_MINUTES, minutes).apply()
@@ -58,5 +78,6 @@ class SettingActivity : AppCompatActivity() {
         const val FROM_SETTING = "from_setting"
         const val PREFS_NAME = "setting_minutes"
         const val KEY_MINUTES = "minutes"
+        const val KEY_TOGGLE = "toggle"
     }
 }

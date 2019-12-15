@@ -14,7 +14,7 @@
                 android:value="false" />
 
         <activity
-                android:name=".ui.MainActivity"
+                android:name=".ui.top.MainActivity"
                 android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +23,17 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.SettingActivity"
+                android:name=".ui.setting.SettingActivity"
                 android:theme="@style/AppTheme.ActionBar.Transparent" />
 
         <service android:name="com.example.a1440.service.RemindService" />
+        <receiver android:name=".broadcast.RemindBroadcastReceiver"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.example.a1440.broadcast.ACTION_TAG" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
