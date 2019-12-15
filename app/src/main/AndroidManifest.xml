@@ -26,12 +26,10 @@
                 android:name=".ui.setting.SettingActivity"
                 android:theme="@style/AppTheme.ActionBar.Transparent" />
 
-        <service android:name="com.example.a1440.service.RemindService" />
         <receiver android:name=".broadcast.RemindBroadcastReceiver"
                 android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="com.example.a1440.broadcast.ACTION_TAG" />
             </intent-filter>
         </receiver>
     </application>

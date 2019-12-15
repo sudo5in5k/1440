@@ -1,4 +1,4 @@
-package com.example.a1440.service
+package com.example.a1440.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup

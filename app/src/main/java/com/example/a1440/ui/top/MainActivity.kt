@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.a1440.R
-import com.example.a1440.service.RemindService
+import com.example.a1440.broadcast.RemindBroadcastReceiver
 import com.example.a1440.ui.setting.SettingActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
@@ -66,10 +66,12 @@ class MainActivity : AppCompatActivity() {
 
             when (requestCode) {
                 REQUEST_CODE_TO_SETTING -> {
-                    val intent = Intent(applicationContext, RemindService::class.java).apply {
-                        putExtra("minutes", minutes)
-                    }
-                    val pendingIntent = PendingIntent.getService(
+                    val intent =
+                        Intent(applicationContext, RemindBroadcastReceiver::class.java).apply {
+                            putExtra("minutes", minutes)
+                            action = RemindBroadcastReceiver.ACTION_TAG
+                        }
+                    val pendingIntent = PendingIntent.getBroadcast(
                         applicationContext, -1, intent,
                         PendingIntent.FLAG_CANCEL_CURRENT
                     )
