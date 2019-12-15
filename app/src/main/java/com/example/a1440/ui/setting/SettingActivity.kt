@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.a1440.R
+import com.example.a1440.ui.top.TopViewModel
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
@@ -15,6 +16,11 @@ class SettingActivity : AppCompatActivity() {
     private val settingViewModel: SettingViewModel by lazy {
         ViewModelProvider.AndroidViewModelFactory(this.application)
             .create(SettingViewModel::class.java)
+    }
+
+    private val topViewModel: TopViewModel by lazy {
+        ViewModelProvider.AndroidViewModelFactory(this.application)
+            .create(TopViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +50,7 @@ class SettingActivity : AppCompatActivity() {
                 save.isEnabled = true
             } else {
                 save.isEnabled = false
-                Toast.makeText(this, "通知設定を解除しました", Toast.LENGTH_SHORT).show()
-                // TODO alarmManager.cancel
+                topViewModel.cancelAlarmRepeat(settingViewModel.getSavedMinutes())
             }
         }
         toggle.isChecked = settingViewModel.getSavedToggleState()

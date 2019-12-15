@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val topViewModel: TopViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(
+        ViewModelProvider.AndroidViewModelFactory(this.application).create(
             TopViewModel::class.java
         )
     }
@@ -59,28 +59,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            val minutes = data?.getIntExtra(
-                SettingActivity.FROM_SETTING,
-                DEFAULT_MINUTES
-            ) ?: return
-
+            val minutes = topViewModel.getMinutesFromIntent(data) ?: return
             when (requestCode) {
                 REQUEST_CODE_TO_SETTING -> {
-                    val intent =
-                        Intent(applicationContext, RemindBroadcastReceiver::class.java).apply {
-                            putExtra("minutes", minutes)
-                            action = RemindBroadcastReceiver.ACTION_TAG
-                        }
-                    val pendingIntent = PendingIntent.getBroadcast(
-                        applicationContext, -1, intent,
-                        PendingIntent.FLAG_CANCEL_CURRENT
-                    )
-                    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager?
-                    alarmManager?.setInexactRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        topViewModel.getNotificationTriggerAtTime(Calendar.getInstance(), minutes),
-                        AlarmManager.INTERVAL_DAY, pendingIntent
-                    )
+                    topViewModel.setAlarmRepeat(minutes)
                     Toast.makeText(this, "残り${minutes}分で設定しました", Toast.LENGTH_LONG).show()
                 }
                 else -> Unit
