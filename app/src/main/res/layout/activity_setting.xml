@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:orientation="vertical"
         tools:context=".ui.top.MainActivity">
 
@@ -17,14 +18,17 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
                 android:layout_marginStart="20dp"
                 android:text="通知設定をオン/オフできます"
+                android:textColor="@color/defaultTextColor"
                 android:textSize="18sp" />
 
         <Switch
                 android:id="@+id/toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginEnd="20dp" />
 
     </FrameLayout>
@@ -38,6 +42,7 @@
             android:gravity="center"
             android:maxLines="2"
             android:text="設定した残り時間(分)になったら\nPUSH通知でお知らせできます"
+            android:textColor="@color/defaultTextColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/notification_timer" />
 
@@ -47,6 +52,7 @@
             android:layout_height="40dp"
             android:inputType="text"
             android:maxLines="1"
+            android:textColor="@color/defaultTextColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +67,7 @@
             android:layout_margin="16dp"
             android:maxLines="1"
             android:text="※1から1440までを指定できます"
+            android:textColor="@color/defaultTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notification_timer" />
@@ -68,9 +75,10 @@
     <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:text="設定を保存する"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hint" />
