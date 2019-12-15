@@ -29,11 +29,10 @@ class SettingActivity : AppCompatActivity() {
 
         save.setOnClickListener {
             if (validate()) {
-                val intent = Intent()
                 val minutes =
                     notification_timer.text.toString().toIntOrNull() ?: return@setOnClickListener
                 saveMinutes(minutes)
-                intent.putExtra(FROM_SETTING, minutes)
+                val intent = Intent().apply { putExtra(FROM_SETTING, minutes) }
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             } else {
@@ -47,6 +46,8 @@ class SettingActivity : AppCompatActivity() {
                 save.isEnabled = true
             } else {
                 save.isEnabled = false
+                Toast.makeText(this, "通知設定を解除しました", Toast.LENGTH_SHORT).show()
+                // TODO alarmManager.cancel
             }
         }
         toggle.isChecked = getSavedToggleState()
