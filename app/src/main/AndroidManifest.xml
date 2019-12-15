@@ -26,7 +26,7 @@
         </activity>
         <activity
                 android:name=".ui.setting.SettingActivity"
-                android:theme="@style/AppTheme.ActionBar.Transparent" />
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <receiver android:name=".broadcast.RemindBroadcastReceiver"
                 android:exported="false">

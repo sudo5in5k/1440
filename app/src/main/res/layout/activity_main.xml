@@ -11,7 +11,7 @@
             android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/defaultTextColor"
+            android:textColor="@color/displayTextColor"
             android:textSize="120sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/description"

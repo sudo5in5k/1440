@@ -10,15 +10,14 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@id/setting_description"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="60dp"
+            android:background="#262846"
+            app:layout_constraintTop_toTopOf="parent">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_gravity="start|center_vertical"
                 android:layout_marginStart="20dp"
                 android:text="通知設定をオン/オフできます"
                 android:textColor="@color/defaultTextColor"
@@ -28,7 +27,7 @@
                 android:id="@+id/toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="20dp" />
 
     </FrameLayout>
@@ -38,27 +37,54 @@
             android:id="@+id/setting_description"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:maxLines="2"
-            android:text="設定した残り時間(分)になったら\nPUSH通知でお知らせできます"
+            android:text="設定した残り時間になったら\nPUSH通知でお知らせできます"
             android:textColor="@color/defaultTextColor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/notification_timer" />
+            app:layout_constraintBottom_toTopOf="@id/timer_frame" />
 
-    <EditText
-            android:id="@+id/notification_timer"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/defaultTextColor"
-            android:textSize="18sp"
+    <LinearLayout
+            android:id="@+id/timer_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="1440" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="残り"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="18sp" />
+
+        <EditText
+                android:id="@+id/notification_timer"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/displayTextColor"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1440" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="18sp" />
+    </LinearLayout>
 
     <TextView
             android:id="@+id/hint"
@@ -70,12 +96,12 @@
             android:textColor="@color/defaultTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notification_timer" />
+            app:layout_constraintTop_toBottomOf="@id/timer_frame" />
 
     <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:text="設定を保存する"
             android:textSize="18sp"
