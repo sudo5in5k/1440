@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+        }
+
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         topViewModel.sendEventLog(firebaseAnalytics)
 

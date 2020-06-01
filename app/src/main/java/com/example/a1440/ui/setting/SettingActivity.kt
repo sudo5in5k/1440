@@ -1,9 +1,13 @@
 package com.example.a1440.ui.setting
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -27,11 +31,19 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = getString(R.string.title_header_setting)
+        }
+
         notification_timer.text =
             Editable.Factory.getInstance()
                 .newEditable(settingViewModel.getSavedMinutes().toString())
 
         save.setOnClickListener {
+            closeKeyboard()
             if (settingViewModel.validate(notification_timer.text.toString())) {
                 val minutes =
                     notification_timer.text.toString().toIntOrNull() ?: return@setOnClickListener
@@ -45,15 +57,32 @@ class SettingActivity : AppCompatActivity() {
         }
 
         toggle.setOnCheckedChangeListener { _, isChecked ->
-            settingViewModel.saveToggleState(isChecked)
+            settingViewModel.saveSwitchState(isChecked)
             if (isChecked) {
                 save.isEnabled = true
+                setting_timer_container.visibility = View.VISIBLE
             } else {
                 save.isEnabled = false
+                setting_timer_container.visibility = View.GONE
                 topViewModel.cancelAlarmRepeat(settingViewModel.getSavedMinutes())
             }
         }
-        toggle.isChecked = settingViewModel.getSavedToggleState()
+        toggle.isChecked = settingViewModel.getSwitchState()
+    }
+
+    private fun closeKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {

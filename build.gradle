@@ -12,7 +12,8 @@ buildscript {
             'dagger2': '2.11',
             'coroutine': '1.1.0',
             'lifecycleExtensions': '2.0.0',
-            'recyclerView': '1.0.0'
+            'recyclerView': '1.0.0',
+            'material': '1.2.0-alpha06'
     ]
 
     repositories {

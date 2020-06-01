@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="background">#00A968</color>
-    <color name="displayTextColor">#F9F5D1</color>
-    <color name="defaultTextColor">#D3D3D3</color>
+    <color name="default_background">#FFFFFF</color>
+    <color name="woody_dark">#AB885A</color>
+    <color name="woody_common">#DEB887</color>
+    <color name="woody_light">#FFEAB7</color>
+    <color name="color_text_default">#282828</color>
+    <color name="color_text_white">#FFFFFF</color>
 </resources>

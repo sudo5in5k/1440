@@ -45,7 +45,7 @@ class TopViewModel(private val app: Application) : AndroidViewModel(app) {
     /**
      * PUSHにて設定するTriggerAtTimeを取得
      */
-    fun getNotificationTriggerAtTime(deviceCal: Calendar, minutes: Int): Long {
+    private fun getNotificationTriggerAtTime(deviceCal: Calendar, minutes: Int): Long {
         val settingMinutesToMills = TimeUnit.MINUTES.toMillis(minutes.toLong())
         val remainingTimeMills = getTomorrowCal(deviceCal).timeInMillis - settingMinutesToMills
         // 残り分数が通知設定分数よりも少ない場合は即発火を防ぐため1日ずらす

@@ -14,22 +14,15 @@ class SettingViewModel(app: Application) : AndroidViewModel(app) {
         )
     }
 
-    fun saveToggleState(isChecked: Boolean) {
+    fun saveSwitchState(isChecked: Boolean) {
         prefs.edit().putBoolean(KEY_TOGGLE, isChecked).apply()
     }
 
-    fun getSavedToggleState() = prefs.getBoolean(
-        KEY_TOGGLE,
-        false
-    )
+    fun getSwitchState() = prefs.getBoolean(KEY_TOGGLE, false)
 
-    fun saveMinutes(minutes: Int) =
-        prefs.edit().putInt(KEY_MINUTES, minutes).apply()
+    fun saveMinutes(minutes: Int) = prefs.edit().putInt(KEY_MINUTES, minutes).apply()
 
-    fun getSavedMinutes() = prefs.getInt(
-        KEY_MINUTES,
-        MainActivity.DEFAULT_MINUTES
-    )
+    fun getSavedMinutes() = prefs.getInt(KEY_MINUTES, MainActivity.DEFAULT_MINUTES)
 
     fun validate(number: String): Boolean {
         val notificationMinutes = number.toIntOrNull() ?: return false

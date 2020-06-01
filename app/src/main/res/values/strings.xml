@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">1440</string>
+    <string name="minutes_out_of_1440">minutes out of 1440</string>
+    <string name="title_header_setting">通知設定</string>
 </resources>
