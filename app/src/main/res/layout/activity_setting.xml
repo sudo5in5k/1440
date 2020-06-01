@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:text="通知設定"
+                    android:text="@string/setting_notification"
                     android:textColor="@color/color_text_default"
                     android:textSize="@dimen/text_size_common" />
 
@@ -81,7 +81,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="設定した残り時間になったら\n通知でお知らせします"
+                    android:text="@string/description_notification_setting"
                     android:textColor="@color/color_text_default"
                     android:textSize="@dimen/text_size_common"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="残り"
+                        android:text="@string/text_remain"
                         android:textColor="@color/color_text_default"
                         android:textSize="@dimen/text_size_common" />
 
@@ -106,6 +106,7 @@
                         android:id="@+id/notification_timer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:autofillHints="@string/app_name"
                         android:gravity="center"
                         android:inputType="text"
                         android:maxLines="1"
@@ -121,7 +122,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="分"
+                        android:text="@string/text_minutes"
                         android:textColor="@color/color_text_default"
                         android:textSize="@dimen/text_size_common" />
                 </LinearLayout>
@@ -132,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="18dp"
                     android:maxLines="1"
-                    android:text="※1から1440までを指定できます"
+                    android:text="@string/text_hint"
                     android:textColor="@color/color_text_default"
                     android:textSize="@dimen/text_size_small"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +151,7 @@
                     android:onClick="@{() -> viewModel.onSaveClick()}"
                     android:paddingStart="18dp"
                     android:paddingEnd="18dp"
-                    android:text="設定を保存する"
+                    android:text="@string/text_save_setting"
                     android:textColor="@color/color_text_default"
                     android:textSize="@dimen/text_size_common"
                     app:layout_constraintEnd_toEndOf="parent"

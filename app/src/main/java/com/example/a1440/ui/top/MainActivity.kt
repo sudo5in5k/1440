@@ -1,9 +1,6 @@
 package com.example.a1440.ui.top
 
 import android.app.Activity
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -12,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.a1440.R
-import com.example.a1440.broadcast.RemindBroadcastReceiver
 import com.example.a1440.ui.setting.SettingActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
@@ -21,7 +17,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {

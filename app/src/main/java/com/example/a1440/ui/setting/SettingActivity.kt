@@ -4,14 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.view.MenuItem
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.a1440.R
@@ -21,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivitySettingBinding
+    private lateinit var binding: ActivitySettingBinding
 
     private val settingViewModel: SettingViewModel by lazy {
         ViewModelProvider.AndroidViewModelFactory(this.application)
@@ -45,7 +42,7 @@ class SettingActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            title = getString(R.string.title_header_setting)
+            title = getString(R.string.setting_notification)
         }
 
         observeValues()

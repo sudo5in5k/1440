@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">1440</string>
     <string name="minutes_out_of_1440">minutes out of 1440</string>
-    <string name="title_header_setting">通知設定</string>
+    <string name="setting_notification">通知設定</string>
+    <string name="description_notification_setting">設定した残り時間になったら\n通知でお知らせします</string>
+    <string name="text_remain">残り</string>
+    <string name="text_minutes">分</string>
+    <string name="text_hint">※1から1440までを指定できます</string>
+    <string name="text_save_setting">設定を保存する</string>
+    <string name="text_setting">設定</string>
 </resources>
