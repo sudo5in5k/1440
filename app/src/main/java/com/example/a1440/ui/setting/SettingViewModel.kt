@@ -1,37 +1,67 @@
 package com.example.a1440.ui.setting
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.example.a1440.ui.top.MainActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
+import com.example.a1440.data.SharedPreferenceRepository
 
 class SettingViewModel(app: Application) : AndroidViewModel(app) {
 
-    private val prefs by lazy {
-        app.getSharedPreferences(
-            PREFS_NAME,
-            Context.MODE_PRIVATE
-        )
+    private val repository = SharedPreferenceRepository(app.applicationContext)
+
+    val currentSettingMinutes = MutableLiveData<String>(repository.savedMinutes.toString())
+
+    val checked = MutableLiveData<Boolean>(repository.switchState)
+
+    val timerContainerVisibility = checked.map {
+        it
     }
 
-    fun saveSwitchState(isChecked: Boolean) {
-        prefs.edit().putBoolean(KEY_TOGGLE, isChecked).apply()
+    private val _cancelAlarm = MutableLiveData<Int>()
+    val cancelAlarm: LiveData<Int>
+        get() = _cancelAlarm
+
+    private val _closeKeyBoard = MutableLiveData<Boolean>()
+    val closeKeyboard: LiveData<Boolean>
+        get() = _closeKeyBoard
+
+    private val _backToMain = MutableLiveData<Int>()
+    val backToMain: LiveData<Int>
+        get() = _backToMain
+
+    private val _showValidateError = MutableLiveData<Boolean>()
+    val showValidateError: LiveData<Boolean>
+        get() = _showValidateError
+
+    private fun validate(minutesString: String?): Boolean {
+        minutesString ?: return false
+        val minutesInt = kotlin.runCatching { minutesString.toIntOrNull() }.getOrNull() ?: false
+        return minutesInt in 1..1440
     }
 
-    fun getSwitchState() = prefs.getBoolean(KEY_TOGGLE, false)
-
-    fun saveMinutes(minutes: Int) = prefs.edit().putInt(KEY_MINUTES, minutes).apply()
-
-    fun getSavedMinutes() = prefs.getInt(KEY_MINUTES, MainActivity.DEFAULT_MINUTES)
-
-    fun validate(number: String): Boolean {
-        val notificationMinutes = number.toIntOrNull() ?: return false
-        return notificationMinutes in 1..1440
+    fun onSwitchStatusChanged() {
+        val checked = checked.value ?: false
+        repository.saveSwitchState(checked)
+        if (!checked) {
+            _cancelAlarm.value = repository.savedMinutes
+        }
     }
 
-    companion object {
-        const val PREFS_NAME = "setting_minutes"
-        const val KEY_MINUTES = "minutes"
-        const val KEY_TOGGLE = "toggle"
+    fun onSaveClick() {
+        closeKeyboard()
+        val currentMinutes = currentSettingMinutes.value
+        if (validate(currentMinutes)) {
+            val currentMinutesInt = currentMinutes?.toInt() ?: return
+            repository.saveMinutes(currentMinutesInt)
+            _backToMain.value = currentMinutesInt
+        } else {
+            _showValidateError.value = true
+        }
+    }
+
+    private fun closeKeyboard() {
+        _closeKeyBoard.value = true
     }
 }

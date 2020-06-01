@@ -52,6 +52,8 @@ dependencies {
 
     // lifecycle-extensions
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensions}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycleExtensions}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleExtensions}"
 
     // Material
     implementation "com.google.android.material:material:${versions.material}"
