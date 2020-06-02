@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.a1440.ui.setting.SettingViewModel" />
+            type="sho.ushikubo.a1440.ui.setting.SettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="@color/default_background"
         android:orientation="vertical"
-        tools:context=".ui.top.MainActivity">
+        tools:context="sho.ushikubo.a1440.ui.top.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

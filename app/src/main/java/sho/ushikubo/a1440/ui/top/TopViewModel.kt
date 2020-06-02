@@ -1,4 +1,4 @@
-package com.example.a1440.ui.top
+package sho.ushikubo.a1440.ui.top
 
 import android.app.AlarmManager
 import android.app.Application
@@ -9,8 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import com.example.a1440.broadcast.RemindBroadcastReceiver
-import com.example.a1440.ui.setting.SettingActivity
+import sho.ushikubo.a1440.broadcast.RemindBroadcastReceiver
+import sho.ushikubo.a1440.ui.setting.SettingActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -57,7 +57,10 @@ class TopViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun getMinutesFromIntent(intent: Intent?): Int? {
-        return intent?.getIntExtra(SettingActivity.FROM_SETTING, MainActivity.DEFAULT_MINUTES)
+        return intent?.getIntExtra(
+            SettingActivity.FROM_SETTING,
+            MainActivity.DEFAULT_MINUTES
+        )
     }
 
     private fun createBroadCastIntent(minutes: Int) =

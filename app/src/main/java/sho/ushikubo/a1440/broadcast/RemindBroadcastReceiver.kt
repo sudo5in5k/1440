@@ -1,10 +1,10 @@
-package com.example.a1440.broadcast
+package sho.ushikubo.a1440.broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.a1440.notification.NotificationImpl
-import com.example.a1440.notification.NotificationType
+import sho.ushikubo.a1440.notification.NotificationImpl
+import sho.ushikubo.a1440.notification.NotificationType
 import kotlinx.coroutines.runBlocking
 
 class RemindBroadcastReceiver: BroadcastReceiver() {
@@ -12,7 +12,8 @@ class RemindBroadcastReceiver: BroadcastReceiver() {
         val receiveContext = context ?: return
         if (intent?.action != ACTION_TAG) return
         val minutes = intent.getIntExtra("minutes", 0)
-        val notification = NotificationImpl(receiveContext)
+        val notification =
+            NotificationImpl(receiveContext)
         runBlocking {
             notification.send(
                 NotificationType.SIMPLE,

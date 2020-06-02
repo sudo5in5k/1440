@@ -1,4 +1,4 @@
-package com.example.a1440
+package sho.ushikubo.a1440
 
 import org.junit.Test
 

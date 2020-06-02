@@ -1,4 +1,4 @@
-package com.example.a1440.ui.top
+package sho.ushikubo.a1440.ui.top
 
 import android.app.Activity
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.a1440.R
-import com.example.a1440.ui.setting.SettingActivity
+import sho.ushikubo.a1440.R
+import sho.ushikubo.a1440.ui.setting.SettingActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.example.a1440">
+        package="sho.ushikubo.a1440">
 
     <application
             android:allowBackup="false"
@@ -15,7 +15,7 @@
                 android:value="false" />
 
         <activity
-                android:name=".ui.top.MainActivity"
+                android:name="sho.ushikubo.a1440.ui.top.MainActivity"
                 android:theme="@style/AppTheme.ActionBar.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.setting.SettingActivity"
+                android:name="sho.ushikubo.a1440.ui.setting.SettingActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <receiver android:name=".broadcast.RemindBroadcastReceiver"
+        <receiver android:name="sho.ushikubo.a1440.broadcast.RemindBroadcastReceiver"
                 android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

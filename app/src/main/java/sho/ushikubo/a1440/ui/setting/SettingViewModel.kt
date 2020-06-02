@@ -1,15 +1,16 @@
-package com.example.a1440.ui.setting
+package sho.ushikubo.a1440.ui.setting
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.example.a1440.data.SharedPreferenceRepository
+import sho.ushikubo.a1440.data.SharedPreferenceRepository
 
 class SettingViewModel(app: Application) : AndroidViewModel(app) {
 
-    private val repository = SharedPreferenceRepository(app.applicationContext)
+    private val repository =
+        SharedPreferenceRepository(app.applicationContext)
 
     val currentSettingMinutes = MutableLiveData<String>(repository.savedMinutes.toString())
 

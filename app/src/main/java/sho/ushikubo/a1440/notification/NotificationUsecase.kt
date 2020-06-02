@@ -1,4 +1,4 @@
-package com.example.a1440.notification
+package sho.ushikubo.a1440.notification
 
 import android.content.Intent
 

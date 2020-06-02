@@ -1,4 +1,4 @@
-package com.example.a1440.notification
+package sho.ushikubo.a1440.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
@@ -8,9 +8,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
-import com.example.a1440.R
+import sho.ushikubo.a1440.R
 
-internal class NotificationImpl(private val context: Context) : NotificationUsecase {
+internal class NotificationImpl(private val context: Context) :
+    NotificationUsecase {
 
     override suspend fun send(
         type: NotificationType,

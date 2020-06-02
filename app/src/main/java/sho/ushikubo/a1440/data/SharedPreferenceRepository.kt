@@ -1,7 +1,7 @@
-package com.example.a1440.data
+package sho.ushikubo.a1440.data
 
 import android.content.Context
-import com.example.a1440.ui.top.MainActivity
+import sho.ushikubo.a1440.ui.top.MainActivity
 
 class SharedPreferenceRepository(context: Context) {
 

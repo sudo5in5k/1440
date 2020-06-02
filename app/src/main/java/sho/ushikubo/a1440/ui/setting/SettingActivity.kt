@@ -1,4 +1,4 @@
-package com.example.a1440.ui.setting
+package sho.ushikubo.a1440.ui.setting
 
 import android.app.Activity
 import android.content.Context
@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.example.a1440.R
-import com.example.a1440.databinding.ActivitySettingBinding
-import com.example.a1440.ui.top.TopViewModel
+import sho.ushikubo.a1440.R
+import sho.ushikubo.a1440.databinding.ActivitySettingBinding
+import sho.ushikubo.a1440.ui.top.TopViewModel
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
